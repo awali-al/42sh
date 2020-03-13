@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/08 14:21:04 by awali-al          #+#    #+#             */
-/*   Updated: 2020/03/09 04:35:51 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/03/13 06:32:52 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,14 @@ static int	built_in(char *cmd)
 	if (!ft_strcmp(cmd, "cd") || !ft_strcmp(cmd, "echo") ||
 			!ft_strcmp(cmd, "env") || !ft_strcmp(cmd, "exit") ||
 			!ft_strcmp(cmd, "setenv") || !ft_strcmp(cmd, "type") ||
-			!ft_strcmp(cmd, "unsetenv"))
+			!ft_strcmp(cmd, "unsetenv") || !ft_strcmp(cmd, "alias") ||
+			!ft_strcmp(cmd, "unalias"))
 	{
 		ft_putstr(cmd);
 		ft_putendl(" is a shell builtin");
-		return (1);
+		return (0);
 	}
-	return (0);
+	return (-1);
 }
 
 static char	*comp(char *cmd, char *pth, char *dir)
@@ -76,7 +77,7 @@ static int	output(char *cmd, char *pth, int ret)
 	return (ret);
 }
 
-void		my_type(char **line)
+int			my_type(char **line)
 {
 	char			**arr;
 	char			*pth;
@@ -88,7 +89,7 @@ void		my_type(char **line)
 	arr = ft_strsplit(getenv("PATH"), ':');
 	while (line[i])
 	{
-		if (!built_in(line[i]))
+		if (built_in(line[i]) && alias_check(line[i], 0))
 		{
 			pth = path(arr, line[i]);
 			ret = output(line[i], pth, ret);
@@ -96,5 +97,5 @@ void		my_type(char **line)
 		}
 		i++;
 	}
-	exit(ret);
+	return (ret);
 }

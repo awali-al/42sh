@@ -6,15 +6,16 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 03:50:07 by awali-al          #+#    #+#             */
-/*   Updated: 2020/03/09 04:24:55 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/03/13 09:12:51 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_sh.h"
 
-int		main(int ac, char **av, char **env)
+t_alias		*g_alias;
+
+int		main(int ac, char **av)
 {
 	(void)ac;
-	(void)env;
-	my_type(av + 1);
+	return (0);
 }
