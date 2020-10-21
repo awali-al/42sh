@@ -1,27 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.h                                             :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/18 14:37:26 by aminewalial       #+#    #+#             */
-/*   Updated: 2020/10/21 14:03:25 by awali-al         ###   ########.fr       */
+/*   Created: 2020/10/21 13:56:56 by awali-al          #+#    #+#             */
+/*   Updated: 2020/10/21 14:06:12 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TEST_H
-# define TEST_H
+#include "test.h"
+#include <stdio.h>
 
-# include "libft/libft.h"
-# include <sys/types.h>
-# include <sys/stat.h>
-
-int		my_test(char *cmd, char **av, char **env);
-int		binary_operator_check(char **av);
-int		file_check(char o, char *av);
-int		unary_operator_check(char *av);
-int		expression_check(char **av);
-int		ft_isint(char *str);
-
-#endif
+int	main(int ac, char **av, char **env)
+{
+	(void)ac;
+	printf("%d\n", my_test(av[0], av, env));
+	return (0);
+}
