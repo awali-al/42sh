@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 08:45:33 by aminewalial       #+#    #+#             */
-/*   Updated: 2020/10/23 19:07:01 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/10/26 13:58:13 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,9 @@ int	unary_operator_check(char *av)
 		return (0);
 	else
 	{
-		if (!av[1])
-			ft_putstr_fd("42sh: parse error: condition expected: ", 2);
-		else
-			ft_putstr_fd("test: unknown condition: ", 2);
-		ft_putendl_fd(av, 2);
+		ft_putstr_fd("42sh: test: ", 2);
+		ft_putstr_fd(av, 2);
+		ft_putendl_fd(": unary operator expected", 2);
 		return (1);
 	}
 }
@@ -63,8 +61,9 @@ int	binary_operator_check(char **av)
 		return (0);
 	else
 	{
-		ft_putstr_fd("42sh: condition expected: ", 2);
-		ft_putendl_fd(av[2], 2);
+		ft_putstr_fd("42sh: test: ", 2);
+		ft_putstr_fd(av[2], 2);
+		ft_putendl_fd(": binary operator expected", 2);
 		return (1);
 	}
 }
@@ -73,19 +72,18 @@ int	expression_check(char **av)
 {
 	int			r;
 
+	if (ft_strcmp(av[2], "=") && ft_strcmp(av[2], "!=") &&
+			(!ft_isint(av[1]) || !ft_isint(av[3])))
+	{
+		ft_putstr_fd("42sh: test: integer expression expected: ", 2);
+		if (!ft_isint(av[1]))
+			ft_putstr_fd(av[1], 2);
+		else
+			ft_putstr_fd(av[3], 2);
+		ft_putstr_fd(": integer expression expected", 2);
+		return (2);
+	}
 	r = 1;
-	if (ft_strcmp(av[2], "=") && ft_strcmp(av[2], "!=") && !ft_isint(av[1]))
-	{
-		ft_putstr_fd("test: integer expression expected: ", 2);
-		ft_putendl_fd(av[1], 2);
-		return (2);
-	}
-	if (ft_strcmp(av[2], "=") && ft_strcmp(av[2], "!=") && !ft_isint(av[3]))
-	{
-		ft_putstr_fd("test: integer expression expected: ", 2);
-		ft_putendl_fd(av[3], 2);
-		return (2);
-	}
 	r = !ft_strcmp(av[2], "=") && !ft_strcmp(av[1], av[3]) ? 0 : r;
 	r = !ft_strcmp(av[2], "!=") && ft_strcmp(av[1], av[3]) ? 0 : r;
 	r = !ft_strcmp(av[2], "-eq") && ft_atoi(av[1]) == ft_atoi(av[3]) ? 0 : r;
