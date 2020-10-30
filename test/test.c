@@ -6,19 +6,24 @@
 /*   By: awali-al <awali-al@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/18 14:35:44 by aminewalial       #+#    #+#             */
-/*   Updated: 2020/10/26 14:02:21 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/10/30 18:37:58 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "test.h"
 
+static int	one_arg(char **av)
+{
+	if (!av[1][0])
+		return (1);
+	else
+		return (0);
+}
+
 static int	two_args(char **av)
 {
 	if (!ft_strcmp(av[1], "!"))
-	{
-		if (av[2] && av[2][0])
-			return (1);
-	}
+		return (!one_arg(av + 1));
 	else
 	{
 		if (unary_operator_check(av[1]))
@@ -31,7 +36,7 @@ static int	two_args(char **av)
 
 static int	three_args(char **av)
 {
-	if (ft_strcmp(av[1], "!"))
+	if (!ft_strcmp(av[1], "!"))
 		return (!two_args(av + 1));
 	else if (!ft_strcmp(av[1], "(") && !ft_strcmp(av[3], ")"))
 	{
@@ -58,8 +63,10 @@ int			my_test(char *cmd, char **av, char **env)
 {
 	(void)cmd;
 	(void)env;
-	if (!av[1] || (av[1] && !av[1][0] && !av[2]))
+	if (!av[1])
 		return (1);
+	else if (av[1] && !av[2])
+		return (one_arg(av));
 	else if (av[2] && !av[3])
 		return (two_args(av));
 	else if (av[3] && !av[4])

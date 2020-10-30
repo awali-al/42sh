@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 08:45:33 by aminewalial       #+#    #+#             */
-/*   Updated: 2020/10/26 13:58:13 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/10/30 18:39:15 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,12 @@ int	expression_check(char **av)
 	if (ft_strcmp(av[2], "=") && ft_strcmp(av[2], "!=") &&
 			(!ft_isint(av[1]) || !ft_isint(av[3])))
 	{
-		ft_putstr_fd("42sh: test: integer expression expected: ", 2);
+		ft_putstr_fd("42sh: test: ", 2);
 		if (!ft_isint(av[1]))
 			ft_putstr_fd(av[1], 2);
 		else
 			ft_putstr_fd(av[3], 2);
-		ft_putstr_fd(": integer expression expected", 2);
+		ft_putendl_fd(": integer expression expected", 2);
 		return (2);
 	}
 	r = 1;
