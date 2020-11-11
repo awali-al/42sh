@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/03 10:42:02 by awali-al          #+#    #+#             */
-/*   Updated: 2020/11/03 10:44:10 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/11/04 19:02:43 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,11 @@ int		ft_str2del(char **str)
 	int		i;
 
 	i = 0;
-	while (str[i])
-		ft_strdel(str[i++]);
-	free(str);
+	if (str)
+	{
+		while (str[i])
+			ft_strdel(&str[i++]);
+		free(str);
+	}
 	return (0);
 }

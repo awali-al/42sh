@@ -1,31 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strappend.c                                     :+:      :+:    :+:   */
+/*   ft_strstich.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: awali-al <awali-al@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/02 02:34:31 by awali-al          #+#    #+#             */
-/*   Updated: 2020/11/08 16:39:03 by awali-al         ###   ########.fr       */
+/*   Created: 2020/11/04 17:52:59 by awali-al          #+#    #+#             */
+/*   Updated: 2020/11/08 16:40:06 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "hash_table.h"
 
-char	*ft_strappend(char *str, char c)
+char	*ft_strstich(char *str1, char thread, char *str2)
 {
 	char	*ret;
-	int		i;
+	char	*tmp;
 
-	i = 0;
-	ret = ft_strnew(ft_strlen(str) + 1);
-	while (str[i])
-	{
-		ret[i] = str[i];
-		i++;
-	}
-	ret[i] = c;
-	i++;
-	ret[i] = '\0';
+	tmp = ft_strappend(str1, thread);
+	ret = ft_strjoin(tmp, str2);
+	ft_strdel(&tmp);
 	return (ret);
 }

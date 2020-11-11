@@ -6,51 +6,61 @@
 /*   By: awali-al <awali-al@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/01 17:10:40 by awali-al          #+#    #+#             */
-/*   Updated: 2020/11/03 10:40:22 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/11/11 13:40:29 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "hash_table.h"
 
-int		get_hfd(char *file, char **env, int o)
+int		get_fd(int flag)
 {
 	char	*str;
 	int		ret;
-	int		i;
 
-	if (!file)
-	{
-		i = 0;
-		while (env[i] != ft_strstr(env[i], "HOME="))
-			i++;
-		str = ft_strjoin(env[i] + 5, "/.hash");
-	}
+	str = ft_strjoin(getenv("HOME"), "/.hash");
+	if (flag == 'r')
+		ret = open(str, O_RDONLY | O_CREAT, S_IRWXU);
+	else if (flag == 'a')
+		ret = open(str, O_WRONLY | O_APPEND);
 	else
-		str = ft_strdup(file);
-	ret = open(str, o);
-	ft_strdel(str);
+		ret = open(str, O_TRUNC);
+	ft_strdel(&str);
 	return (ret);
 }
 
-char		**hash_table(char *file, char **env)
+static char	*get_line(int fd)
+{
+	char	*ret;
+	char	buf[HASH_BUFF + 1];
+	char	*tmp;
+	int		n;
+	
+	ret = ft_strnew(1);
+	while ((n = read(fd, buf, HASH_BUFF)) > 0)
+	{
+		tmp = ret;
+		buf[n] = '\0';
+		ret = ft_strjoin(tmp, buf);
+		ft_strdel(&tmp);
+	}
+	close(fd);
+	return (ret);
+}
+
+char		**hash_table(void)
 {
 	char	**hash;
 	char	*path;
-	char	*buf;
-	char	*tmp;
 	int		fd;
 
-	if ((fd = get_hfd(file, env, O_RDONLY)) == -1)
+	fd = get_fd('r');
+	if (fd == -1)
 		return (NULL);
-	while (read(fd, buf, 10000))
-	{
-		tmp = path;
-		path = ft_strjoin(tmp, buf);
-		ft_strdel(tmp);
-		ft_strdel(buf);
-	}
-	close(fd);
-	hash = ft_strchr(path, -2) ? ft_strsplit(path, -2) : NULL;
-	ft_strdel(path);
+	path = get_line(fd);
+	if (path && ft_strchr(path, SEPARATOR))
+		hash = ft_strsplit(path, SEPARATOR);
+	else
+		hash = NULL;
+	ft_strdel(&path);
 	return (hash);
 }

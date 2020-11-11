@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/01 17:11:01 by awali-al          #+#    #+#             */
-/*   Updated: 2020/11/03 10:55:05 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/11/08 18:52:37 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,23 @@
 # define HASH_TABLE_H
 
 # include "libft/libft.h"
+# include <dirent.h>
 # include <fcntl.h>
+# include <sys/stat.h>
+# include <sys/types.h>
+# include <stdio.h>
 
+# define HASH_BUFF 1000
+# define SEPARATOR -2
+
+char	*ft_strstich(char *str1, char thread, char *str2);
 char	*ft_strappend(char *str, char c);
 int		ft_str2del(char **str);
 
-char	**hash_table(char *file, char **env);
-char	*hash_chck(char *cmd, char *file, char **env);
-int		hash_add(char *cmd, char *path, char **env);
-int		get_hfd(char *file, char **env, int o);
+char	**hash_table(void);
+char	*hash_chck(char *cmd);
+int		hash_add(char *cmd, char *path);
+int		get_fd(int o);
 int		hash(char *cmd, char **av, char **env);
 
 #endif

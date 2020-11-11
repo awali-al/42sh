@@ -1,31 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strappend.c                                     :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: awali-al <awali-al@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/02 02:34:31 by awali-al          #+#    #+#             */
-/*   Updated: 2020/11/08 16:39:03 by awali-al         ###   ########.fr       */
+/*   Created: 2020/11/04 19:00:00 by awali-al          #+#    #+#             */
+/*   Updated: 2020/11/11 18:52:03 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "hash_table.h"
+#include <stdio.h>
 
-char	*ft_strappend(char *str, char c)
+int		main(int ac, char **av, char **env)
 {
-	char	*ret;
-	int		i;
-
-	i = 0;
-	ret = ft_strnew(ft_strlen(str) + 1);
-	while (str[i])
-	{
-		ret[i] = str[i];
-		i++;
-	}
-	ret[i] = c;
-	i++;
-	ret[i] = '\0';
-	return (ret);
+	(void)ac;
+	printf("%d\n", hash(av[0], av, env));
+	return (0);
 }
