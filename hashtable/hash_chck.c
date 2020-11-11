@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 02:39:55 by awali-al          #+#    #+#             */
-/*   Updated: 2020/11/11 18:55:03 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/11/11 19:12:11 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static char	*path_check(char *cmd)
 	struct dirent	*file;
 	char			**table;
 	char			*ret;
-	DIR				*fd;		
+	DIR				*fd;
 	int				i;
 
 	ret = NULL;

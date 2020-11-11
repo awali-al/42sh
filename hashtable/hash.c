@@ -6,13 +6,13 @@
 /*   By: awali-al <awali-al@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/01 18:27:35 by awali-al          #+#    #+#             */
-/*   Updated: 2020/11/11 17:04:54 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/11/11 19:11:42 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "hash_table.h"
 
-static int	hash_print()
+static int	hash_print(void)
 {
 	char	**table;
 	int		i;
@@ -96,7 +96,7 @@ int			hash(char *cmd, char **av, char **env)
 			if (av[2])
 				ft_putendl_fd("hash: too many arguments", 2);
 			else
-				return (hash_clear());	
+				return (hash_clear());
 		}
 		else
 			return (hash_entries(av));
